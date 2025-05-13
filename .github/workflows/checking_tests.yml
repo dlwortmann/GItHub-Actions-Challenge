@@ -42,6 +42,6 @@ jobs:
           npm run develop &
           sleep 10 
 
-      - name: Run vitest tests
-        run: npm run test
+      - name: Run cypress tests
+        run: npm run test-component
 
