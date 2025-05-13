@@ -41,6 +41,7 @@ jobs:
         run: |
             npm run start:server &
             npx wait-on http://localhost:3001
+            curl -I http://localhost:3001
 
       - name: Run Cypress Tests
         run: npx cypress run --browser electron
