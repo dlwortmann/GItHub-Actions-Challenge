@@ -1,4 +1,4 @@
-name: Checking Tests
+name: Checking Tests on feature branches
 
 on:
   pull_request:
@@ -10,6 +10,17 @@ jobs:
   test:
     name: Checking Tests
     runs-on: ubuntu-latest
+
+    services:
+      mongo:
+        image: mongo:6
+        ports:
+          - 27017:27017
+        options: >-
+          --health-cmd="mongosh --eval 'db.runCommand({ ping: 1 })'"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
 
     steps:
       - name: Checkout code
@@ -26,6 +37,11 @@ jobs:
       - name: Build App
         run: npm run build
 
-      - name: Run vitest tests
-        run: npm run test
+      - name: Start server in background
+        run: |
+          npm run develop &
+          sleep 10 
+
+      - name: Run cypress tests
+        run: npm run test-component
 
