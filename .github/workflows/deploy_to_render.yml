@@ -13,11 +13,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Test
+      - name: Install dependencies
         run: |
-          npm install
-          npm run test
+            npm install
+            cd server && npm install
+            cd ../client && npm install
 
+      - name: Start server and wait
+        run: |
+            npm run start:server &
+            npx wait-on http://localhost:3001
+
+      - name: Run Cypress Tests
+        run: npx cypress run --browser electron
       - name: Deploy
         # Only run this step if the branch is main
         if: github.ref == 'refs/heads/main'
