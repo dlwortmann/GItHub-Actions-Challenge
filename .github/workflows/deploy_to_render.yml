@@ -19,6 +19,9 @@ jobs:
             cd server && npm install
             cd ../client && npm install
 
+      - name: Install wait-on
+        run: npm install -g wait-on
+        
       - name: Start server and wait
         run: |
             npm run start:server &
