@@ -14,10 +14,10 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // Serve API routes first
-app.use(routes);
+app.use('/api', routes);
 
 // Serve static files from React dist folder
-const clientDistPath = path.resolve(__dirname, '../../client/dist');
+const clientDistPath = path.join(__dirname, '../../client/dist');
 app.use(express.static(clientDistPath));
 
 // Catch-all route for React SPA
