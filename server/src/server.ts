@@ -14,7 +14,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // Serve API routes first
-app.use('/api', routes);
+app.use(routes);
 
 // Serve static files from React dist folder
 const clientDistPath = path.join(__dirname, '../../client/dist');
