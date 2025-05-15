@@ -17,7 +17,7 @@ app.use(express.json());
 app.use(routes);
 
 // Serve static files from React dist folder
-const clientDistPath = path.join(__dirname, '../../client/dist');
+const clientDistPath = path.resolve(__dirname, '../../client/dist');
 app.use(express.static(clientDistPath));
 
 // Catch-all route for React SPA
